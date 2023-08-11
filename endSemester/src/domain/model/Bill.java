@@ -15,9 +15,7 @@ public class Bill {
     private Double donGia;
     private int soLuong = 0;
     private String loaiHD;
-    // private Double thanhTienH;
-    // private Double thanhTienD;
-
+   
     public Bill(int maHD, String tenKH, int maPhong, String ngayHD,Double donGia,String loaiHD, int soLuong) {
         this.maPhong = maPhong;
         this.ngayHD = ngayHD;
@@ -85,29 +83,12 @@ public class Bill {
     }
 
 
-                // MaPhong int,
-                // TenKH nvarchar(50),
-                // NgayHD date,
-                // MaHD int,
-                // DonGia smallmoney,
-                // ThanhTienH smallmoney,
-                // ThanhTienD smallmoney,
-
-    
-
-    // Getters and setters for the fields (omitted for brevity)
-
     @Override
     public String toString() {
         return "maHD: " + maHD + ", tenKH: " + tenKH + ", maPhong: " + maPhong + ", ngayHD: " + ngayHD
                 + ", donGia: " + donGia + ", loaiHD: " + loaiHD + ", soLuong: " + soLuong + "Thanh Tien:" + pay();
     }
-// int maHD, String tenKH, int maPhong, Date ngayHD,Double donGia, Double thanhTienH, Double thanhTienD
-    // public double Pay(){
-    //     double averageMark = (javaMark * 2.0 + htmlMark + cssMark) / 4.0;
-    //     return averageMark;
 
-    // }
     public Double pay() {
         Double thanhTien;
         System.err.println(loaiHD);

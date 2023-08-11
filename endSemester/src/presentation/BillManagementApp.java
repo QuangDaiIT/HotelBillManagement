@@ -3,6 +3,7 @@ package presentation;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import command.CommandProcessor;
 import domain.*;
 import domain.model.Bill;
 import pesistence.BillJdbcGateway;
@@ -10,16 +11,12 @@ import pesistence.BillJdbcGateway;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.Date;
-
 public class BillManagementApp extends JFrame {
+    private Bill bill;
+    private CommandProcessor commandProcessor;
     private BillService billService;
     private BillJdbcGateway billJdbcGateway;
     private JTable table;
@@ -97,7 +94,7 @@ public class BillManagementApp extends JFrame {
         inputPanel.add(jbuttonIn, BorderLayout.CENTER);
         add(inputPanel, BorderLayout.SOUTH);
 
-        // Add action listeners for buttons
+
         addButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 addBill();
@@ -175,27 +172,10 @@ public class BillManagementApp extends JFrame {
         int maHD = Integer.parseInt(maHDTextField.getText());
         String tenKH = TenKHTextField.getText();
         int maPhong = Integer.parseInt(maPhongTextField.getText());
-        // SimpleDateFormat df = new SimpleDateFormat("dd/mm/yyyy");
-        // DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String ngayHD = ngayHDTextField.getText();
-        // Date ngayHD = df.parse(ngayHDTextField.getText());
-        
         Double donGia = Double.parseDouble(donGiaTextField.getText());
         String loaiHD = loaiHDTextField.getText();
         int soLuong = Integer.parseInt(soLuongDTextField.getText());
-        // Calculate the average mark using the formula provided
-        // double averageMark = (javaMark * 2.0 + htmlMark + cssMark) / 4.0;
-        // create table bill2 (
-        // MaPhong int,
-        // TenKH nvarchar(50),
-        // NgayHD date,
-        // MaHD int,
-        // DonGia smallmoney,
-        // LoaiHD nvarchar(50),
-        // SoLuong int,
-        // ThanhTien smallmoney
-        // )
-
 
         Bill bill = new Bill(maHD, tenKH, maPhong, ngayHD, donGia, loaiHD,soLuong);
         // billService.addBill(bill);
@@ -220,8 +200,6 @@ public class BillManagementApp extends JFrame {
         Double donGia = Double.parseDouble(donGiaTextField.getText());
         String loaiHD = loaiHDTextField.getText();
         int soLuong = Integer.parseInt(soLuongDTextField.getText());
-        // Calculate the average mark using the formula provided
-        // double averageMark = (javaMark * 2.0 + htmlMark + cssMark) / 4.0;
 
         Bill bill = new Bill(maHD, tenKH, maPhong, ngayHD, donGia, loaiHD, soLuong);
         // billService.updateBill(bill);
@@ -293,13 +271,6 @@ public class BillManagementApp extends JFrame {
         tableModel.getDataVector().removeAllElements();
         tableModel.fireTableDataChanged();
         List<Bill> bills = billJdbcGateway.getAllBills();
-        // students.add(new Student(111, "Le Van Teo", "IT", 5, 5, 5, 5));
-        // students.add(new Student(222, "Le Van Ty", "IT", 7,
-        //         7, 5, 7));
-        // students.add(new Student(333, "Le Van Tung", "IT", 5,
-        //         5, 5, 5));
-        
-        // tableModel.setRowCount(0); // Clear previous data
         for (Bill bill : bills) {
             Object[] rowData = { bill.getMaHD(), bill.getTenKH(), bill.getMaPhong(),
                     bill.getNgayHD(), bill.getDonGia(), bill.getLoaiHD(), bill.getSoLuong(), bill.pay() };
@@ -309,7 +280,6 @@ public class BillManagementApp extends JFrame {
         // billJdbcGateway.
         
     }
-// int maHD, String tenKH, int maPhong, Date ngayHD,Double donGia, Double thanhTienH, Double thanhTienD
     // Method to clear input fields
     private void clearFields() {
         maHDTextField.setText("");
@@ -385,5 +355,6 @@ public class BillManagementApp extends JFrame {
             JOptionPane.showMessageDialog(null,"gia tri nhap khong hop le!");
         }
     }
+    
 
 }

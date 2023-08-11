@@ -1,7 +1,4 @@
-/*
-*  created date: Jul 24, 2023
-*  author: cgm
-*/
+
 package pesistence;
 
 import java.util.List;
